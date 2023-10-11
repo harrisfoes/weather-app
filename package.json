@@ -2,15 +2,24 @@
   "name": "weather-app",
   "version": "1.0.0",
   "description": "A simple weather app to practice fetching data from an API",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "eslint": "^8.51.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.28.1",
+    "html-webpack-plugin": "^5.5.3",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
   }
 }
