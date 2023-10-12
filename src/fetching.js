@@ -1,24 +1,24 @@
-
+const url = "http://api.weatherapi.com/v1/current.json"
 const weatherKey = "bc1c9de3a1544d53b1544128230810";
-const url = "https://api.weatherapi.com/v1/current.json";
-const query = "london";
-const completeUrl = `${url  }?key=${  weatherKey  }&q=${  query}`;
+const myUrl = `${ url  }?key=${  weatherKey  }`;
 
 
-export default async function getData(myUrl) {
+export default async function getData(query) {
+
+  const completeUrl = `${myUrl}&q=${query}`;
+  console.log(myUrl);
+
   try {
-    const response = await fetch(myUrl, {mode:'cors'})
+    const response = await fetch(completeUrl, {mode:'cors'})
     const weatherData = await response.json();
-    
+
+    console.log(weatherData);
     return weatherData;
 
   } catch (error) {
     return null;
   }
 }
-
-getData(completeUrl);
-
 
 
 /*
