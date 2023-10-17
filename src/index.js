@@ -3,13 +3,34 @@ import {uiInit, createWeatherCard, clearCard, createForm} from "./ui";
 
 uiInit();
 
-const wData = getData("Cebu").then((data) =>  data);
-const theData = await wData;
-
 const attachForm = () => {
   const cityForm = document.querySelector('form');
   cityForm.addEventListener("submit", findCity, {once: true});
 }
+
+const attachUnit = async (cityName,mode) => {
+  const cityData = await getData(cityName).then((data) => data);
+  clearCard();
+  createForm();
+  attachForm();
+  await createWeatherCard(cityData, mode);
+  attachCelsius(cityName);
+  attachFarenheit(cityName);
+}
+
+const attachCelsius = async (cityName) => {
+  const c = document.querySelector('.celcius');
+  console.log(cityName);
+  console.log(c);
+  c.addEventListener("click", () => {attachUnit(cityName, "c")});
+}
+
+const attachFarenheit = async (cityName) => {
+  const f = document.querySelector('.farenheit');
+  console.log(f);
+  f.addEventListener("click", () => {attachUnit(cityName, "f")});
+}
+
 
 const findCity = async (e) => {
   e.preventDefault();
@@ -20,7 +41,9 @@ const findCity = async (e) => {
   clearCard();
   createForm();
   attachForm();
-  createWeatherCard(cityData);
+  await createWeatherCard(cityData, "c");
+  attachCelsius(cityName);
+  attachFarenheit(cityName);
 }
 
 

@@ -27,17 +27,20 @@ function createImage(imgSrc, parent){
   parent.appendChild(ele);
 }
 
-export function createButtons() {
+export function createButtons(parentDiv) {
   const btnC = document.createElement("button");
   const btnF = document.createElement("button");
+  btnC.classList.add("celcius");
+  btnF.classList.add("farenheit");
   btnC.textContent = "°C";
   btnF.textContent = "°F";
 
   const div = document.createElement("div");
+  div.classList.add("temp-buttons");
 
   div.appendChild(btnC);
   div.appendChild(btnF);
-  contentDiv.appendChild(div);
+  parentDiv.appendChild(div);
 }
 
 export function createForm() {
@@ -62,21 +65,34 @@ export function clearCard() {
   contentDiv.innerHTML = '';
 }
 
-export async function createWeatherCard(data) {
+export async function createWeatherCard(data, mode) {
+  console.log(data);
+  console.log(mode);
   const loc = await data.location;
   const condi = await data.condition; 
   const humid = await data.humid;
   const tempC = await data.temp_c;
   const feelsC = await data.fl_c;
   const wImage = await data.img;
+  const tempF = await data.temp_f;
+  const feelsF = await data.fl_f;
 
-  createElement("div", loc, "location", contentDiv);
-  createImage(wImage, contentDiv);
-  createElement("div", condi, "condition", contentDiv);
-  createElement("div", `Humidity: ${humid}`, humid, contentDiv);
-  createElement("div", `${tempC} °C`, "temp", contentDiv);
-  createElement("div", `Feels like ${feelsC} °C`, "feels-like", contentDiv);
-  createButtons();
+  const tempToUse = (mode === "c") ? `${tempC} °C` : `${tempF} °F`
+  const feelToUse = (mode === "c") ? `${feelsC} °C` : `${feelsF} °F`
+
+  const parentDiv = document.createElement("div");
+  parentDiv.classList.add("parentDiv");
+
+  createElement("div", loc, "location", parentDiv);
+  createImage(wImage, parentDiv);
+  createElement("div", condi, "condition", parentDiv);
+  createElement("div", `Humidity: ${humid}%`, "humid", parentDiv);
+  createElement("div", `${tempToUse}`, "temp", parentDiv);
+  createElement("div", `Feels like ${feelToUse}`, "feels-like", parentDiv);
+  createButtons(parentDiv);
+
+  contentDiv.appendChild(parentDiv);
+  console.log("buttons created");
 }
 
 export function uiInit() {
