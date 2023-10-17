@@ -1,4 +1,4 @@
-# weather-app
+t# weather-app
 A simple weather app to practice fetching data from an API
 
 
@@ -10,7 +10,7 @@ A simple weather app to practice fetching data from an API
 - [x] write the functions that process the JSON data
  - [x] return an object with only the data required for 
  the app
- - [ ] data -> Location, 
+ - [x] data -> Location, 
 - [ ] setup a simple form that will let users input their location
 - [ ] display the information on the webpage
 - [ ] add styling

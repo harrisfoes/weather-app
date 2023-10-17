@@ -1,6 +1,24 @@
+
 const url = "http://api.weatherapi.com/v1/current.json"
 const weatherKey = "bc1c9de3a1544d53b1544128230810";
 const myUrl = `${ url  }?key=${  weatherKey  }`;
+
+function filterData(data){
+  const filteredData = {
+
+    location : data.location.name,
+    condition : data.current.condition.text,
+    humid : data.current.humidity,
+    temp_c : data.current.temp_c,
+    temp_f : data.current.temp_f,
+    fl_c : data.current.feelslike_c,
+    fl_f : data.current.feelslike_f,
+    img: data.current.condition.icon
+  }
+
+  console.log(filteredData);
+  return filteredData
+}
 
 
 export default async function getData(query) {
@@ -12,12 +30,14 @@ export default async function getData(query) {
     const response = await fetch(completeUrl, {mode:'cors'})
     const weatherData = await response.json();
 
-    console.log(weatherData);
-    return weatherData;
-
+    return filterData(weatherData);
+  
   } catch (error) {
+    console.log(error);
+    alert("Sorry, cannot find that location");
     return null;
   }
+
 }
 
 

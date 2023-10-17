@@ -1,32 +1,30 @@
 import getData from "./fetching";
-import uiCard from "./ui";
+import {uiInit, createWeatherCard, clearCard, createForm} from "./ui";
 
-uiCard();
+uiInit();
+
 const wData = getData("Cebu").then((data) =>  data);
 const theData = await wData;
 
-console.log(theData);
-console.log(theData.current);
-console.log(theData.location);
+const attachForm = () => {
+  const cityForm = document.querySelector('form');
+  cityForm.addEventListener("submit", findCity, {once: true});
+}
 
-const location = theData.location.name;
-console.log(location);
+const findCity = async (e) => {
+  e.preventDefault();
+  const cityName = document.querySelector('.cityName').value;
+  const cityData = await getData(cityName).then((data) => data);
+  console.log(cityData);
 
-const condition = theData.current.condition.text;
-console.log(condition);
+  clearCard();
+  createForm();
+  attachForm();
+  createWeatherCard(cityData);
+}
 
-const humid = theData.current.humidity;
-console.log(humid);
 
-const temp_c = theData.current.temp_c;
-console.log(temp_c);
-const temp_f = theData.current.temp_f;
-console.log(temp_f);
-
-const fl_c = theData.current.feelslike_c;
-console.log(fl_c);
-const fl_f = theData.current.feelslike_f;
-console.log(fl_f);
+attachForm();
 
 /*
 current.condition.icon
