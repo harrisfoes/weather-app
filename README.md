@@ -1,6 +1,6 @@
 ## Weather-app
 A simple weather app to practice fetching data from an API
-URL:
+URL: https://harrisfoes.github.io/weather-app/
 
 ## About
 This is a Weather forecast app where you can search for the current weather for any location around the world.
