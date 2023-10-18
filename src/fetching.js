@@ -33,7 +33,6 @@ export default async function getData(query) {
     return filterData(weatherData);
   
   } catch (error) {
-    console.log(error);
     alert("Sorry, cannot find that location");
     return null;
   }

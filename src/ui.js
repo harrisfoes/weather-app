@@ -66,8 +66,6 @@ export function clearCard() {
 }
 
 export async function createWeatherCard(data, mode) {
-  console.log(data);
-  console.log(mode);
   const loc = await data.location;
   const condi = await data.condition; 
   const humid = await data.humid;
@@ -86,13 +84,12 @@ export async function createWeatherCard(data, mode) {
   createElement("div", loc, "location", parentDiv);
   createImage(wImage, parentDiv);
   createElement("div", condi, "condition", parentDiv);
-  createElement("div", `Humidity: ${humid}%`, "humid", parentDiv);
   createElement("div", `${tempToUse}`, "temp", parentDiv);
   createElement("div", `Feels like ${feelToUse}`, "feels-like", parentDiv);
+  createElement("div", `Humidity: ${humid}%`, "humid", parentDiv);
   createButtons(parentDiv);
 
   contentDiv.appendChild(parentDiv);
-  console.log("buttons created");
 }
 
 export function uiInit() {
