@@ -1,5 +1,5 @@
 
-const url = "http://api.weatherapi.com/v1/current.json"
+const url = "https://api.weatherapi.com/v1/current.json"
 const weatherKey = "bc1c9de3a1544d53b1544128230810";
 const myUrl = `${ url  }?key=${  weatherKey  }`;
 
